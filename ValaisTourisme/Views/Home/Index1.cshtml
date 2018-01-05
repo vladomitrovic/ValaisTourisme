@@ -1,0 +1,36 @@
+﻿@model ValaisTourisme.Models.SearchModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <center><h1><p>Bienvenue sur Valais Booking !</p></h1></center>
+    
+
+    @using (Html.BeginForm("Search", "Room", FormMethod.Post))
+    {
+
+
+    <center>
+
+            @Html.DropDownListFor(model => Model.Location, Model.Location, "--Select--")
+
+    </center>
+
+
+
+    <center>
+      
+        <input style="height:25px;" type="date" name="checkin"><input style="height:25px;" type="date" name="checkout">
+    
+    </center>
+    <p><center><h4>Check-in                Check-out</h4></center></p>
+
+    }
+
+    <p><center>
+           @Html.ActionLink("Recherche", "Search", "Room", null, new { @class = "btn btn-primary" })
+     </center></p>
+
+</div>
+

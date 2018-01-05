@@ -1,0 +1,83 @@
+﻿@model ValaisTourisme.ViewModels.BookVM
+@{
+    ViewBag.Title = "Hotel List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hotels</h2>
+<br />
+<h4>Filter hotel</h4>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="MinCategory" class="control-label col-md-2">Minimum category</label>
+            <select name="MinCategory" id="MinCategory" class="form-control col-md-10">
+                <option selected value="0">Value</option>
+                @for (var i = 1; i <= 5; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="MaxCategory" class="control-label col-md-2">Maximum category</label>
+            <select name="MaxCategory" id="MaxCategory" class="form-control col-md-10">
+                <option selected value="0">Value</option>
+                @for (var i = 1; i <= 5; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+        <div class="form-group form-group-sort">
+            <div class="col-md-2"><input type="checkbox" name="HasWifi" /> Wifi included</div>
+            <div class="col-md-2"><input type="checkbox" name="HasParking" /> Parking included</div>
+            <div class="col-md-8">
+                @*<input type="submit" value="Filter" class="btn btn-primary" />*@
+                @Html.ActionLink("Filter", "Index", "Book", new { filter = true }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+        <div class="form-group">
+        </div>
+}
+<br />
+<table class="table table-striped" style="width:100%;">
+    <thead>
+        <tr>
+            <th style="width:20%">Name</th>
+            <th style="width:20%">Location</th>
+            <th style="width:20%">Category</th>
+            <th style="width:20%">Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hotel in Model.Hotels)
+        {
+            <tr>
+                <td>@hotel.Name</td>
+                <td>@hotel.Location</td>
+                <td>
+                    @for (var i = hotel.Category; i > 0; i--)
+                    {
+                        <p style="font-size:20px;display:inline-block">*</p>
+                    }
+                </td>
+                <td>
+                    <p>@hotel.Phone</p>
+                    <p>@hotel.Email</p>
+                    <p>@hotel.Website</p>
+                </td>
+                <td>
+                    <p>@Html.ActionLink("Details", "Details", new { id = hotel.IdHotel }, new { @class = "btn btn-primary" })</p>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

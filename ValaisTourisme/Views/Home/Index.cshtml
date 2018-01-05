@@ -1,0 +1,44 @@
+﻿@model MVC.ViewModels.BookVM
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+<br />
+@using (Html.BeginForm("Index", "Book", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="Checkin" class="control-label col-md-2">Check-in</label>
+            <input type="date" id="Checkin" name="Checkin" class="form-control col-md-10" />
+        </div>
+        <div class="form-group">
+            <label for="Checkout" class="control-label col-md-2">Check-out</label>
+            <input type="date" id="Checkout" name="Checkout" class="form-control col-md-10" />
+        </div>
+        <div class="form-group">
+            <label for="Location" class="control-label col-md-2">Location</label>
+            <select name="Location" id="Location" class="form-control col-md-10">
+                @foreach (var location in Model.Locations)
+                {
+                    <option value="@location">@location</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="NbPerson" class="control-label col-md-2">Occupant</label>
+            <select name="NbPerson" id="NbPerson" class="form-control col-md-10">
+                @for (var i = 1; i <= 10; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+}

@@ -2,7 +2,7 @@ README - Biblio - April 2018
 
 I. The project
 -----------------------
-This application was developped by ******* for the module 644-1 Mobile developpement and the topic is Book.
+This application was developped by ******* for the module 623-1 Implémentation SI.
 
 
 II. Database
